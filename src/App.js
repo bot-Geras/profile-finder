@@ -1,30 +1,49 @@
 import { useEffect, useState } from "react";
-import ProfileCard from "./components/profile-card.component";
+import ProfileCardList from "./components/profile-card-list.component";
+import SearchBar from "./components/searchBar/search.component";
 
 function App() {
-  const API_URL = "https://touchinspiration-0ada.restdb.io/rest";
-  const API_KEY = "63be7360969f06502871ad7f";
-  const objOption = {
-    headers: {
-      "x-apikey": API_KEY,
-      "Content-Type": "application/json",
-    },
-  };
+ 
+
   const [userProfile, setUserProfile] = useState([]);
+  const [searchField, setSearchField] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState(userProfile);
 
   useEffect(() => {
-    fetch(` ${API_URL}/sample`, objOption)
-      .then((res) => res.json())
-      .then((data) => setUserProfile(data));
+    const fetchData = async () => {
+      const response = await fetch("https://touchinspiration-0ada.restdb.io/rest/sample", {
+        mode: "no-cors",
+        method: 'GET',
+        headers: {
+          "x-apikey": "63be7360969f06502871ad7f",
+          "Content-Type": "application/json"
+
+        }
+      })
+      const user = await response.json()
+      setUserProfile(user)
+    }
+   fetchData()
+   
   }, []);
 
-  const userProfileHtml = userProfile.slice().map((profile) => {
-    return <ProfileCard key={profile._id} {...profile} />;
-  });
+  useEffect(() => {
+    const filterNewUsers = userProfile.filter((user) => {
+        return user.name.toLowerCase().includes(searchField);
+      });
+    setFilteredUsers(filterNewUsers)
+  }, [userProfile, searchField]);
+
+  function onSearchHandler(e) {
+    const searchString = e.target.value.toLowerCase();
+    setSearchField(searchString);
+  }
 
   return (
-    <div className="w-full bg-orange-100 flex flex-col sm:items-stretch sm:flex-row sm:flex-wrap justify-center items-center ">
-      {userProfileHtml}
+    <div>
+      <SearchBar search={onSearchHandler} />
+     
+      <ProfileCardList list={filteredUsers} />
     </div>
   );
 }

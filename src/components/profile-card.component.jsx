@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfileCard = ({bio, name, occupation}) => {
+const ProfileCard = ({bio, name, occupation, _id}) => {
     return (
         <div
         className="m-2 p-4 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
