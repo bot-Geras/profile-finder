@@ -11,32 +11,9 @@ function Home() {
   const [filteredUsers, setFilteredUsers] = useState(userProfile);
   console.log(data);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await fetch("https://touchinspiration-0ada.restdb.io/rest/sample", {
-  //       mode: "no-cors",
-  //       method: 'GET',
-  //       headers: {
-  //         "x-apikey": "63be7360969f06502871ad7f",
-  //         "Content-Type": "application/json"
-
-  //       }
-  //     })
-  //     const user = await response.json()
-  //     setUserProfile(user)
-  //   }
-  //  fetchData()
-
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch("https://jsonplaceholder.typicode.com/users")
-  //     .then((response) => response.json())
-  //     .then((users) => setUserProfile(users));
-  // }, []);
   useEffect(() => {
     setUserProfile(data);
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     const filterNewUsers = userProfile.filter((user) => {
