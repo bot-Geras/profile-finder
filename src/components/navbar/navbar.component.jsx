@@ -4,7 +4,7 @@ import { Outlet, Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <Fragment>
-      <nav className="w-full py-6 px-20 bg-red-400 flex justify-around items-center">
+      <nav className="w-full py-6 px-20 bg-red-200 flex justify-around items-center">
         <Link to="/">
           <h2 className="text-purple-800 text-xl font-bold cursor-pointer">
             Profile Finder
