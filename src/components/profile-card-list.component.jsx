@@ -2,10 +2,11 @@ import React from "react";
 import ProfileCard from "./profile-card.component";
 
 const ProfileCardList = ({ list }) => {
+  // console.log(list);
   return (
-    <div className="w-full bg-orange-100 flex flex-col sm:items-stretch sm:flex-row sm:flex-wrap justify-center items-center ">
+    <div className="w-full  flex flex-col sm:items-stretch sm:flex-row sm:flex-wrap justify-center items-center ">
       {list.map((profile) => {
-        return <ProfileCard key={profile._id} {...profile} />;
+        return <ProfileCard key={profile.id} {...profile} />;
       })}
     </div>
   );

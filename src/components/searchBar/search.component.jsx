@@ -2,7 +2,7 @@ import React from 'react';
 
 const SearchBar = ({search}) => {
     return (
-        <div className="flex items-center">
+        <div className="mt-8 flex items-center">
             <div className="flex border border-purple-200 rounded">
                 <input
                     type="text"

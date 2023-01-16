@@ -1,49 +1,21 @@
-import { useEffect, useState } from "react";
-import ProfileCardList from "./components/profile-card-list.component";
-import SearchBar from "./components/searchBar/search.component";
+import Home from "./components/routes/home/home.component";
+import {Routes,Route} from "react-router-dom"
+import Navbar from "./components/navbar/navbar.component";
+import About from "./components/routes/about.component";
+
 
 function App() {
- 
-
-  const [userProfile, setUserProfile] = useState([]);
-  const [searchField, setSearchField] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState(userProfile);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("https://touchinspiration-0ada.restdb.io/rest/sample", {
-        mode: "no-cors",
-        method: 'GET',
-        headers: {
-          "x-apikey": "63be7360969f06502871ad7f",
-          "Content-Type": "application/json"
-
-        }
-      })
-      const user = await response.json()
-      setUserProfile(user)
-    }
-   fetchData()
-   
-  }, []);
-
-  useEffect(() => {
-    const filterNewUsers = userProfile.filter((user) => {
-        return user.name.toLowerCase().includes(searchField);
-      });
-    setFilteredUsers(filterNewUsers)
-  }, [userProfile, searchField]);
-
-  function onSearchHandler(e) {
-    const searchString = e.target.value.toLowerCase();
-    setSearchField(searchString);
-  }
-
   return (
     <div>
-      <SearchBar search={onSearchHandler} />
-     
-      <ProfileCardList list={filteredUsers} />
+      <Routes>
+        <Route path="/" element={<Navbar />}>
+        <Route index element={<Home />}  />
+        <Route path="about" element={<About />} />
+
+        </Route>
+        
+      </Routes>
+      
     </div>
   );
 }
