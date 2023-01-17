@@ -10,7 +10,7 @@ function Home() {
   const searchResultArray = () =>
     data.filter((result) => result.name.toLowerCase().includes(filterSearch));
   function onSearchHandler(event) {
-    setFilterSearch(event.target.value);
+    setFilterSearch(event.target.value.toLowerCase());
   }
 
   return (
