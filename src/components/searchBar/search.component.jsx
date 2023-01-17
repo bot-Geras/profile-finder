@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchBar = ({search}) => {
+const SearchBar = ({search, handleClick}) => {
     return (
         <div className="mt-8 flex items-center">
             <div className="flex border border-purple-200 rounded">
@@ -10,7 +10,7 @@ const SearchBar = ({search}) => {
                     placeholder="Search..."
                     onChange={search}
                 />
-                <button type='' className="px-4 text-white bg-purple-600 border-l rounded " onClick={search}>
+                <button type='' className="px-4 text-white bg-purple-600 border-l rounded " onClick={handleClick}>
                     Search
                 </button>
             </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import SearchBar from "../../searchBar/search.component";
 import ProfileCardList from "../../profile-card-list.component";
@@ -6,33 +6,18 @@ import { useGetUsersQuery } from "../../../features/dataSlices";
 
 function Home() {
   const { data } = useGetUsersQuery();
-  const [searchField, setSearchField] = useState("");
-  const [userProfile, setUserProfile] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState(userProfile);
- 
-
-  useEffect(() => {
-    setUserProfile(data);
-  }, [data]);
-
-  useEffect(() => {
-    const userProfile = undefined
-    const filterNewUsers = (userProfile || []).filter((user) => {
-      return user.name.toLowerCase().includes(searchField);
-    }) 
-    setFilteredUsers(filterNewUsers);
-  }, [userProfile, searchField]);
-
-  function onSearchHandler(e) {
-    const searchString = e.target.value.toLowerCase();
-    setSearchField(searchString);
+  const [filterSearch, setFilterSearch] = useState("");
+  const searchResultArray = () =>
+    data.filter((result) => result.name.toLowerCase().includes(filterSearch));
+  function onSearchHandler(event) {
+    setFilterSearch(event.target.value);
   }
 
   return (
     <div className="h-screen bg-orange-100 flex flex-col items-center">
-      <SearchBar search={onSearchHandler} />
+      <SearchBar search={onSearchHandler} handleClick={searchResultArray} />
 
-      <ProfileCardList list={filteredUsers} />
+      <ProfileCardList list={data} />
     </div>
   );
 }
