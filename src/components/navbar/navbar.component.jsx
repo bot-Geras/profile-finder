@@ -12,10 +12,10 @@ const Navbar = () => {
         </Link>
         <div className="flex justify-around">
           <Link to="/" className="mr-6 text-lg text font-medium cursor-pointer">
-            Home
+            HOME
           </Link>
           <Link to="/about" className="text-lg font-medium cursor-pointer">
-            About
+            ABOUT
           </Link>
         </div>
       </nav>
