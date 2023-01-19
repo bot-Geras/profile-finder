@@ -4,23 +4,18 @@ import "./index.css";
 import App from "./App";
 
 import { BrowserRouter } from "react-router-dom";
-import {store} from "./store/store"
+import { store } from "./store/store";
 import { Provider } from "react-redux";
-import { ApiProvider } from "@reduxjs/toolkit/dist/query/react";
-import { dataSlice } from "./features/dataSlices";
+// import { ApiProvider } from "@reduxjs/toolkit/dist/query/react";
+// import { dataSlice } from "./features/dataSlices";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-   <Provider store={store}>
-   <ApiProvider api={dataSlice}>
-    <App />
-    </ApiProvider>
-   </Provider>
-     
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
-
-

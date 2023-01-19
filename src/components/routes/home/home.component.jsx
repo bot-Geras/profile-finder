@@ -1,40 +1,28 @@
-import { useState, useEffect } from "react";
-
-import SearchBar from "../../searchBar/search.component";
 import ProfileCardList from "../../Profile-cards/profile-card-list.component";
-import { useGetUsersQuery} from "../../../features/dataSlices";
-import ExportExcel from "../../Excel/excelexport";
 
+import ExportExcel from "../../Excel/excelexport";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Home() {
-  const { data } = useGetUsersQuery();
- 
-  const [filterSearch, setFilterSearch] = useState("");
-  const [newData, setNewData] = useState(data);
-
-  function onSearchHandler(event) {
-    setFilterSearch(event.target.value.toLowerCase());
-  }
-
-  useEffect(() => {
-    const filterResults = data?.filter((result) =>
-      result.occupation.toLowerCase().includes(filterSearch)
-    );
-    setTimeout(() => {
-      setNewData(filterResults);
-    }, 4000);
-  }, [data, filterSearch]);
+  const userProfileList = useSelector((state) => state.users.value);
 
   return (
     <div className="h-screen bg-grey-200 flex flex-col items-center">
-      <SearchBar
+      {/* <SearchBar
         search={onSearchHandler}
         handleClick={(event) => setFilterSearch(event.target.value)}
-      />
-      <ExportExcel excelData={newData} fileName={"Excel Export"} />
+      /> */}
+      <div className="flex gap-4">
+        <ExportExcel excelData={userProfileList} fileName={"Excel Export"} />
+        <Link to="/user">
+          <button className=" my-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+            <span>Create Profile</span>
+          </button>
+        </Link>
+      </div>
 
-      <ProfileCardList list={newData} />
-      
+      <ProfileCardList list={userProfileList} />
     </div>
   );
 }
