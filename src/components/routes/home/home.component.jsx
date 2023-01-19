@@ -1,19 +1,14 @@
-
 import ProfileCardList from "../../Profile-cards/profile-card-list.component";
 
 import ExportExcel from "../../Excel/excelexport";
 import { Link } from "react-router-dom";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 function Home() {
-
-const userProfileList = useSelector((state) => state.users.value)
-
- 
+  const userProfileList = useSelector((state) => state.users.value);
 
   return (
     <div className="h-screen bg-grey-200 flex flex-col items-center">
-     
       <div className="flex gap-4">
         <ExportExcel excelData={userProfileList} fileName={"Excel Export"} />
         <Link to="/user">
